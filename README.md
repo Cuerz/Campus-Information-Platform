@@ -1,2 +1,2 @@
 # Campus-Information-Platform
-大四毕设
+用于大四毕设代码托管

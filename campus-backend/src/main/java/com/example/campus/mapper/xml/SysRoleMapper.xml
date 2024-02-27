@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus.mapper.SysRoleMapper">
+    <resultMap type="SysRole" id="SysRoleMap">
+        <id property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="enable" column="enable" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysRoleMap">
+        select *
+        from sys_role
+        where role_id = #{roleId}
+            limit 1
+    </select>
+
+    <!--角色名称查询-->
+    <select id="queryByRoleName" resultMap="SysRoleMap">
+        select *
+        from sys_role
+        where role_name = #{roleName}
+            limit 1
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="queryAll" resultMap="SysRoleMap">
+        select *
+        from sys_role
+        where concat(ifnull(role_name, ''), ifnull(description, '')) like
+              concat('%', ifnull(#{roleName}, ''), '%', ifnull(#{description}, ''), '%')
+    </select>
+
+</mapper>
