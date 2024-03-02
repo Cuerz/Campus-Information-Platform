@@ -14,7 +14,6 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
-
 mybatis:
   type-aliases-package: com.example.campus
   mapper-locations: classpath*:**/xml/**.xml

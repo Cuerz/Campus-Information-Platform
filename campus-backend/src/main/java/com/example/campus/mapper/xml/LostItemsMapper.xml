@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus.mapper.LostItemsMapper">
+    <resultMap type="LostItems" id="LostItemsMap">
+        <id property="lostId" column="lost_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="itemName" column="item_name" jdbcType="VARCHAR"/>
+        <result property="itemPic" column="item_pic" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="contactNumber" column="contact_number" jdbcType="VARCHAR"/>
+        <result property="examine" column="examine" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryAll" resultMap="LostItemsMap">
+        select
+        l.* ,s.nick_name
+        FROM
+        lost_items l
+        LEFT JOIN sys_user s
+        on
+        l.user_id = s.id
+        WHERE (IFNULL(l.item_name, '')) like
+        CONCAT('%', ifnull(#{itemName}, ''), '%')
+        <if test="examine != null">
+            and l.examine = #{examine}
+        </if>
+    </select>
+
+    <select id="queryById" resultMap="LostItemsMap">
+        select l.*,
+               s.nick_name
+        FROM lost_items l
+                 LEFT JOIN sys_user s
+                           on
+                               l.user_id = s.id
+        WHERE l.lost_id = #{lostId}
+    </select>
+
+    <insert id="insert" keyProperty="lostId" useGeneratedKeys="true">
+        insert into lost_items (user_id, item_name, item_pic, description, contact_number)
+        values (#{userId}, #{itemName}, #{itemPic}, #{description}, #{contactNumber})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from lost_items
+        where lost_id = #{lostId}
+    </delete>
+
+    <update id="updateExamine">
+        update lost_items
+        set examine = #{examine}
+        where lost_id = #{lostId}
+    </update>
+
+
+</mapper>

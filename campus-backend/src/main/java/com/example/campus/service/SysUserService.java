@@ -6,13 +6,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface SysUserService {
 
     SaResult queryAll(Integer pageNum, Integer pageSize,String userName,String phoneNumber,Boolean enable);
 
     SaResult queryById(Integer id);
-
 
     SaResult insert(SysUser sysUser);
 

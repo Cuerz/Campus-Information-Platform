@@ -129,7 +129,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'index/:jobId(\\d+)',
-        component: () => import('@/views/monitor/job/log'),
+        component: () => import('@/views/core/old/log'),
         name: 'JobLog',
         meta: { title: '调度日志', activeMenu: '/monitor/job' }
       }
@@ -277,7 +277,7 @@ export const constantRoutes = [
                     {
                         "name": "Operlog",
                         "path": "operlog",
-                        "component":() => import("@/views/monitor/operlog/index"),
+                        "component":() => import("@/views/core/operlog/index"),
                         "hidden": false,
                         "meta": {
                             "title": "操作日志",
@@ -289,7 +289,7 @@ export const constantRoutes = [
                     {
                         "name": "Logininfor",
                         "path": "logininfor",
-                        "component":() => import("@/views/monitor/logininfor/index"),
+                        "component":() => import("@/views/core/logininfor/index"),
                         "hidden": false,
                         "meta": {
                             "title": "登录日志",
@@ -303,38 +303,38 @@ export const constantRoutes = [
         ]
     },
     {
-        "name": "Monitor",
-        "path": "/monitor",
+        "name": "Core",
+        "path": "/core",
         component: Layout,
         "hidden": false,
         "redirect": "noRedirect",
         "alwaysShow": true,
         "meta": {
-            "title": "系统监控",
+            "title": "核心业务",
             "icon": "monitor",
             "noCache": false,
             "link": null
         },
         "children": [
             {
-                "name": "Online",
-                "path": "online",
-                "component":() => import("@/views/monitor/online/index"),
+                "name": "Lost",
+                "path": "lost",
+                "component":() => import("@/views/core/lost/index"),
                 "hidden": false,
                 "meta": {
-                    "title": "在线用户",
+                    "title": "失物认领",
                     "icon": "online",
                     "noCache": false,
                     "link": null
                 }
             },
             {
-                "name": "Job",
-                "path": "job",
-                "component":() => import("@/views/monitor/job/index"),
+                "name": "Old",
+                "path": "old",
+                "component":() => import("@/views/core/old/index"),
                 "hidden": false,
                 "meta": {
-                    "title": "定时任务",
+                    "title": "二手交易",
                     "icon": "job",
                     "noCache": false,
                     "link": null
@@ -343,7 +343,7 @@ export const constantRoutes = [
             {
                 "name": "Druid",
                 "path": "druid",
-                "component":() => import("@/views/monitor/druid/index"),
+                "component":() => import("@/views/core/druid/index"),
                 "hidden": false,
                 "meta": {
                     "title": "数据监控",
@@ -355,7 +355,7 @@ export const constantRoutes = [
             {
                 "name": "Server",
                 "path": "server",
-                "component":() => import("@/views/monitor/server/index"),
+                "component":() => import("@/views/core/server/index"),
                 "hidden": false,
                 "meta": {
                     "title": "服务监控",
@@ -367,7 +367,7 @@ export const constantRoutes = [
             {
                 "name": "Cache",
                 "path": "cache",
-                "component":() => import("@/views/monitor/cache/index"),
+                "component":() => import("@/views/core/cache/index"),
                 "hidden": false,
                 "meta": {
                     "title": "缓存监控",
@@ -379,7 +379,7 @@ export const constantRoutes = [
             {
                 "name": "CacheList",
                 "path": "cacheList",
-                "component":() => import("@/views/monitor/cache/list"),
+                "component":() => import("@/views/core/cache/list"),
                 "hidden": false,
                 "meta": {
                     "title": "缓存列表",

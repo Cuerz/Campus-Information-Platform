@@ -120,11 +120,12 @@
           <el-table-column
             label="角色"
             align="center"
-            key="role"
-            prop="sysRole.description"
             v-if="columns[4].visible"
-            :show-overflow-tooltip="true"
-          />
+          >
+            <template #default="scope">
+              <el-tag type="danger">{{ scope.row.sysRole.description }}</el-tag>
+            </template>
+          </el-table-column>
           <el-table-column
             label="状态"
             align="center"

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus.mapper.OldStuffMapper">
+    <resultMap type="OldStuff" id="OldStuffMap">
+        <id property="oldStuffId" column="old_stuff_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="oldStuffName" column="old_stuff_name" jdbcType="VARCHAR"/>
+        <result property="oldStuffPic" column="old_stuff_pic" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="contactNumber" column="contact_number" jdbcType="VARCHAR"/>
+        <result property="examine" column="examine" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryAll" resultMap="OldStuffMap">
+        select
+        o.* ,s.nick_name
+        FROM
+        old_stuff o
+        LEFT JOIN sys_user s
+        on
+        o.user_id = s.id
+        WHERE (IFNULL(o.old_stuff_name, '')) like
+        CONCAT('%', ifnull(#{oldStuffName}, ''), '%')
+        <if test="examine != null">
+            and o.examine = #{examine}
+        </if>
+    </select>
+
+    <select id="queryById" resultMap="OldStuffMap">
+        select o.*,
+               s.nick_name
+        FROM old_stuff o
+                 LEFT JOIN sys_user s
+                           on
+                               o.user_id = s.id
+        WHERE o.old_stuff_id = #{oldStuffId}
+    </select>
+
+    <insert id="insert" keyProperty="oldStuffId" useGeneratedKeys="true">
+        insert into old_stuff (user_id, old_stuff_name, old_stuff_pic, description, contact_number)
+        values (#{userId}, #{oldStuffName}, #{oldStuffPic}, #{description}, #{contactNumber})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from old_stuff
+        where old_stuff_id = #{oldStuffId}
+    </delete>
+
+    <update id="updateExamine">
+        update old_stuff
+        set examine = #{examine}
+        where old_stuff_id = #{oldStuffId}
+    </update>
+
+
+</mapper>

@@ -13,6 +13,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -61,5 +65,31 @@ public class BaseApi {
     public SaResult loginInfo() {
         return baseService.getInfo();
     }
+
+
+    @PostMapping("/upload")
+    public SaResult upload(@RequestParam("imgFile") MultipartFile file) throws Exception {
+        if (file.isEmpty()) {
+            return SaResult.error("上传文件不能为空");
+        }
+        String originalFilename = file.getOriginalFilename();
+        String filename = UUID.randomUUID().toString();
+        String filetype = originalFilename.split("\\.")[1];
+
+
+        if (filetype.indexOf("jpg") < 0 && filetype.indexOf("png") < 0) {
+            return SaResult.error("仅支持图片格式");
+        }
+
+        String targetFileName = filename + "." + filetype;
+        // 设置上传至项目文件夹下的uploadFile文件夹中，没有文件夹则创建
+        File dir = new File("images");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        file.transferTo(new File(dir.getAbsolutePath() + File.separator + targetFileName));
+        return SaResult.data("http://localhost:8080/images/"+targetFileName);
+    }
+
 
 }

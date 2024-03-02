@@ -216,36 +216,36 @@ const usePermissionStore = defineStore(
             ]
         },
         {
-            "name": "Monitor",
-            "path": "/monitor",
+            "name": "Core",
+            "path": "/core",
             "hidden": false,
             "redirect": "noRedirect",
             "component": " Layout",
             "alwaysShow": true,
             "meta": {
-                "title": "系统监控",
+                "title": "核心业务",
                 "icon": "monitor",
                 "noCache": false,
                 "link": null
             },
             "children": [
                 {
-                    "name": "Online",
-                    "path": "online",
+                    "name": "Lost",
+                    "path": "lost",
                     "hidden": false,
                     "meta": {
-                        "title": "在线用户",
+                        "title": "失物认领",
                         "icon": "online",
                         "noCache": false,
                         "link": null
                     }
                 },
                 {
-                    "name": "Job",
-                    "path": "job",
+                    "name": "Old",
+                    "path": "old",
                     "hidden": false,
                     "meta": {
-                        "title": "定时任务",
+                        "title": "二手交易",
                         "icon": "job",
                         "noCache": false,
                         "link": null
@@ -562,36 +562,36 @@ const usePermissionStore = defineStore(
             ]
         },
         {
-            "name": "Monitor",
-            "path": "/monitor",
+            "name": "Core",
+            "path": "/core",
             "hidden": false,
             "redirect": "noRedirect",
             "component": " Layout",
             "alwaysShow": true,
             "meta": {
-                "title": "系统监控",
+                "title": "核心业务",
                 "icon": "monitor",
                 "noCache": false,
                 "link": null
             },
             "children": [
                 {
-                    "name": "Online",
-                    "path": "online",
+                    "name": "Lost",
+                    "path": "lost",
                     "hidden": false,
                     "meta": {
-                        "title": "在线用户",
+                        "title": "失物认领",
                         "icon": "online",
                         "noCache": false,
                         "link": null
                     }
                 },
                 {
-                    "name": "Job",
-                    "path": "job",
+                    "name": "Old",
+                    "path": "old",
                     "hidden": false,
                     "meta": {
-                        "title": "定时任务",
+                        "title": "二手交易",
                         "icon": "job",
                         "noCache": false,
                         "link": null

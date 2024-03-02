@@ -2,7 +2,6 @@ package com.example.campus.service.impl;
 
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.SysRole;
-import com.example.campus.domain.SysUser;
 import com.example.campus.mapper.SysRoleMapper;
 import com.example.campus.service.SysRoleService;
 import com.github.pagehelper.PageHelper;
