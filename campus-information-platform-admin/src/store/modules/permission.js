@@ -252,11 +252,11 @@ const usePermissionStore = defineStore(
                     }
                 },
                 {
-                    "name": "Druid",
-                    "path": "druid",
+                    "name": "Activity",
+                    "path": "activity",
                     "hidden": false,
                     "meta": {
-                        "title": "数据监控",
+                        "title": "校园活动",
                         "icon": "druid",
                         "noCache": false,
                         "link": null
@@ -598,11 +598,11 @@ const usePermissionStore = defineStore(
                     }
                 },
                 {
-                    "name": "Druid",
-                    "path": "druid",
+                    "name": "Activity",
+                    "path": "activity",
                     "hidden": false,
                     "meta": {
-                        "title": "数据监控",
+                        "title": "校园活动",
                         "icon": "druid",
                         "noCache": false,
                         "link": null

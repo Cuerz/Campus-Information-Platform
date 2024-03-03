@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus.mapper.AnnouncementMapper">
+    <resultMap type="Announcement" id="AnnouncementMap">
+        <id property="announcementId" column="announcement_id" jdbcType="INTEGER"/>
+        <result property="announcementTitle" column="announcement_title" jdbcType="VARCHAR"/>
+        <result property="announcementContent" column="announcement_content" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="queryAll" resultMap="AnnouncementMap">
+        select *
+        FROM announcement
+        WHERE concat(ifnull(announcement_title, ''), ifnull(announcement_content, '')) like
+              concat('%', ifnull(#{announcementTitle}, ''), '%', ifnull(#{announcementContent}
+
+    </select>
+
+    <select id="queryById" resultMap="AnnouncementMap">
+        select *
+        FROM announcement
+        WHERE announcement_id = #{announcementId}
+    </select>
+
+
+    <insert id="insert" keyProperty="announcementId" useGeneratedKeys="true">
+        insert into announcement (announcement_title, announcement_content)
+        values (#{announcementTitle}, #{announcementContent})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        FROM announcement
+        WHERE announcement_id = #{announcementId}
+    </delete>
+
+
+
+
+</mapper>

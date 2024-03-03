@@ -341,12 +341,12 @@ export const constantRoutes = [
                 }
             },
             {
-                "name": "Druid",
-                "path": "druid",
-                "component":() => import("@/views/core/druid/index"),
+                "name": "Activity",
+                "path": "activity",
+                "component":() => import("@/views/core/activity/index"),
                 "hidden": false,
                 "meta": {
-                    "title": "数据监控",
+                    "title": "校园活动",
                     "icon": "druid",
                     "noCache": false,
                     "link": null

@@ -186,9 +186,9 @@
        </el-col>
      </el-row>
  
-     <!-- 添加失物认领对话框 -->
+     <!-- 添加二手物品对话框 -->
      <el-dialog :title="title" v-model="open" width="600px" append-to-body>
-       <el-form :model="form" :rules="rules" ref="itemRef" label-width="80px">
+       <el-form :model="form" :rules="rules" ref="oldRef" label-width="80px">
          <el-row>
            <el-col :span="12">
              <el-form-item label="物品名称" prop="oldStuffName">
@@ -351,7 +351,7 @@
      oldStuffPic: undefined,
      description: undefined,
    };
-   proxy.resetForm('itemRef');
+   proxy.resetForm('oldRef');
  }
  
  /** 审核状态修改  */
@@ -393,7 +393,7 @@
  
  /** 提交按钮 */
  function submitForm() {
-   proxy.$refs['itemRef'].validate((valid) => {
+   proxy.$refs['oldRef'].validate((valid) => {
      if (valid) {
        addStuff(form.value).then((response) => {
          proxy.$modal.msgSuccess('新增成功');
