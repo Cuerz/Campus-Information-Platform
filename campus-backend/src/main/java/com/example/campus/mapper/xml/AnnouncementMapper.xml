@@ -13,7 +13,7 @@
         select *
         FROM announcement
         WHERE concat(ifnull(announcement_title, ''), ifnull(announcement_content, '')) like
-              concat('%', ifnull(#{announcementTitle}, ''), '%', ifnull(#{announcementContent}
+              concat('%', ifnull(#{announcementTitle}, ''), '%', ifnull(#{announcementContent},''),'%')
 
     </select>
 
