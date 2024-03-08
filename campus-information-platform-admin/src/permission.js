@@ -28,8 +28,6 @@ router.beforeEach((to, from, next) => {
         isRelogin.show = true
         // 判断当前用户是否已拉取完user_info信息
         useUserStore().getInfo().then(() => {
-
-
           // const router = 
           // isRelogin.show = false
           // usePermissionStore().generateRoutes().then(accessRoutes => {

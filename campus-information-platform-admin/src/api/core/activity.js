@@ -11,14 +11,13 @@ export function listActivity(query) {
 
 // 删除记录
 export function delActivity(activityId) {
-    return request({
-      url: '/admin/activity/delete/' + activityId,
-      method: 'delete',
-    });
-  }
+  return request({
+    url: '/admin/activity/delete/' + activityId,
+    method: 'delete',
+  });
+}
 
-
-  // 审核
+// 审核
 export function changeActivityExamine(activityId, examine) {
   const data = {
     activityId,

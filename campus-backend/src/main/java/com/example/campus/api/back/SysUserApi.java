@@ -90,7 +90,6 @@ public class SysUserApi {
             return SaResult.error("旧密码、新密码或确认密码不能为空");
         }
         return sysUserService.updatePassword(oldPassword,newPassword,confirmPassword);
-
     }
 
     @PostMapping("/update")

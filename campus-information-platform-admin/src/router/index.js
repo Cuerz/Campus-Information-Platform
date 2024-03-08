@@ -1,6 +1,6 @@
-import { createWebHistory, createRouter } from "vue-router"
+import { createWebHistory, createRouter } from 'vue-router';
 /* Layout */
-import Layout from "@/layout"
+import Layout from '@/layout';
 
 /**
  * Note: 路由配置项
@@ -27,362 +27,93 @@ import Layout from "@/layout"
 // 公共路由
 export const constantRoutes = [
 	{
-		path: "/redirect",
+		path: '/redirect',
 		component: Layout,
 		hidden: true,
 		children: [
 			{
-				path: "/redirect/:path(.*)",
-				component: () => import("@/views/redirect/index.vue"),
+				path: '/redirect/:path(.*)',
+				component: () => import('@/views/redirect/index.vue'),
 			},
 		],
 	},
 	{
-		path: "/login",
-		component: () => import("@/views/login"),
+		path: '/login',
+		component: () => import('@/views/login'),
 		hidden: true,
 	},
 	{
-		path: "/register",
-		component: () => import("@/views/register"),
+		path: '/:pathMatch(.*)*',
+		component: () => import('@/views/error/404'),
 		hidden: true,
 	},
 	{
-		path: "/:pathMatch(.*)*",
-		component: () => import("@/views/error/404"),
+		path: '/401',
+		component: () => import('@/views/error/401'),
 		hidden: true,
 	},
 	{
-		path: "/401",
-		component: () => import("@/views/error/401"),
-		hidden: true,
-	},
-	{
-		path: "",
+		path: '',
 		component: Layout,
-		redirect: "/index",
+		redirect: '/index',
 		children: [
 			{
-				path: "/index",
-				component: () => import("@/views/index"),
-				name: "Index",
-				meta: { title: "首页", icon: "dashboard", affix: true },
+				path: '/index',
+				component: () => import('@/views/index'),
+				name: 'Index',
+				meta: { title: '首页', icon: 'dashboard', affix: true },
 			},
 		],
 	},
 	{
-		path: "/user",
+		path: '/user',
 		component: Layout,
 		hidden: true,
-		redirect: "noredirect",
+		redirect: 'noredirect',
 		children: [
 			{
-				path: "profile",
-				component: () => import("@/views/system/user/profile/index"),
-				name: "Profile",
-				meta: { title: "个人中心", icon: "user" },
-			},
-		],
-	},
-	{
-		path: "/system/user-auth",
-		component: Layout,
-		hidden: true,
-		children: [
-			{
-				path: "role/:userId(\\d+)",
-				component: () => import("@/views/system/user/authRole"),
-				name: "AuthRole",
-				meta: { title: "分配角色", activeMenu: "/system/user" },
-			},
-		],
-	},
-	{
-		path: "/system/role-auth",
-		component: Layout,
-		hidden: true,
-		children: [
-			{
-				path: "user/:roleId(\\d+)",
-				component: () => import("@/views/system/role/authUser"),
-				name: "AuthUser",
-				meta: { title: "分配用户", activeMenu: "/system/role" },
-			},
-		],
-	},
-	{
-		path: "/system/dict-data",
-		component: Layout,
-		hidden: true,
-		children: [
-			{
-				path: "index/:dictId(\\d+)",
-				component: () => import("@/views/system/dict/data"),
-				name: "Data",
-				meta: { title: "字典数据", activeMenu: "/system/dict" },
-			},
-		],
-	},
-	{
-		path: "/monitor/job-log",
-		component: Layout,
-		hidden: true,
-		children: [
-			{
-				path: "index/:jobId(\\d+)",
-				component: () => import("@/views/core/old/log"),
-				name: "JobLog",
-				meta: { title: "调度日志", activeMenu: "/monitor/job" },
-			},
-		],
-	},
-	{
-		path: "/tool/gen-edit",
-		component: Layout,
-		hidden: true,
-		children: [
-			{
-				path: "index/:tableId(\\d+)",
-				component: () => import("@/views/tool/gen/editTable"),
-				name: "GenEdit",
-				meta: { title: "修改生成配置", activeMenu: "/tool/gen" },
+				path: 'profile',
+				component: () => import('@/views/system/user/profile/index'),
+				name: 'Profile',
+				meta: { title: '个人中心', icon: 'user' },
 			},
 		],
 	},
 
 	{
-		name: "System",
-		path: "/system",
+		name: 'System',
+		path: '/system',
 		component: Layout,
 		hidden: false,
-		redirect: "noRedirect",
+		redirect: 'noRedirect',
 		alwaysShow: true,
 		meta: {
-			title: "系统管理",
-			icon: "system",
+			title: '系统管理',
+			icon: 'system',
 			noCache: false,
 			link: null,
 		},
 		children: [
 			{
-				name: "User",
-				path: "user",
-				component: () => import("@/views/system/user/index"),
+				name: 'User',
+				path: 'user',
+				component: () => import('@/views/system/user/index'),
 				hidden: false,
 				meta: {
-					title: "用户管理",
-					icon: "user",
+					title: '用户管理',
+					icon: 'user',
 					noCache: false,
 					link: null,
 				},
 			},
 			{
-				name: "Role",
-				path: "role",
-				component: () => import("@/views/system/role/index"),
+				name: 'Role',
+				path: 'role',
+				component: () => import('@/views/system/role/index'),
 				hidden: false,
 				meta: {
-					title: "角色管理",
-					icon: "peoples",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Menu",
-				path: "menu",
-				component: () => import("@/views/system/menu/index"),
-				hidden: false,
-				meta: {
-					title: "菜单管理",
-					icon: "tree-table",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Dept",
-				path: "dept",
-				component: () => import("@/views/system/dept/index"),
-				hidden: false,
-				meta: {
-					title: "部门管理",
-					icon: "tree",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Post",
-				path: "post",
-				component: () => import("@/views/system/post/index"),
-				hidden: false,
-				meta: {
-					title: "岗位管理",
-					icon: "post",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Dict",
-				path: "dict",
-				component: () => import("@/views/system/dict/index"),
-				hidden: false,
-				meta: {
-					title: "字典管理",
-					icon: "dict",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Config",
-				path: "config",
-				component: () => import("@/views/system/config/index"),
-				hidden: false,
-				meta: {
-					title: "参数设置",
-					icon: "edit",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Notice",
-				path: "notice",
-				component: () => import("@/views/system/notice/index"),
-				hidden: false,
-				meta: {
-					title: "通知公告",
-					icon: "message",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Log",
-				path: "log",
-				hidden: false,
-				redirect: "noRedirect",
-				alwaysShow: true,
-				meta: {
-					title: "日志管理",
-					icon: "log",
-					noCache: false,
-					link: null,
-				},
-				children: [
-					{
-						name: "Operlog",
-						path: "operlog",
-						component: () => import("@/views/core/operlog/index"),
-						hidden: false,
-						meta: {
-							title: "操作日志",
-							icon: "form",
-							noCache: false,
-							link: null,
-						},
-					},
-					{
-						name: "Logininfor",
-						path: "logininfor",
-						component: () => import("@/views/core/logininfor/index"),
-						hidden: false,
-						meta: {
-							title: "登录日志",
-							icon: "logininfor",
-							noCache: false,
-							link: null,
-						},
-					},
-				],
-			},
-		],
-	},
-	{
-		name: "Core",
-		path: "/core",
-		component: Layout,
-		hidden: false,
-		redirect: "noRedirect",
-		alwaysShow: true,
-		meta: {
-			title: "核心业务",
-			icon: "monitor",
-			noCache: false,
-			link: null,
-		},
-		children: [
-			{
-				name: "Lost",
-				path: "lost",
-				component: () => import("@/views/core/lost/index"),
-				hidden: false,
-				meta: {
-					title: "失物认领",
-					icon: "online",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Old",
-				path: "old",
-				component: () => import("@/views/core/old/index"),
-				hidden: false,
-				meta: {
-					title: "二手交易",
-					icon: "job",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Activity",
-				path: "activity",
-				component: () => import("@/views/core/activity/index"),
-				hidden: false,
-				meta: {
-					title: "校园活动",
-					icon: "druid",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Announcement",
-				path: "announcement",
-				component: () => import("@/views/core/announcement/index"),
-				hidden: false,
-				meta: {
-					title: "公告管理",
-					icon: "server",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "Cache",
-				path: "cache",
-				component: () => import("@/views/core/cache/index"),
-				hidden: false,
-				meta: {
-					title: "缓存监控",
-					icon: "redis",
-					noCache: false,
-					link: null,
-				},
-			},
-			{
-				name: "CacheList",
-				path: "cacheList",
-				component: () => import("@/views/core/cache/list"),
-				hidden: false,
-				meta: {
-					title: "缓存列表",
-					icon: "redis-list",
+					title: '角色管理',
+					icon: 'peoples',
 					noCache: false,
 					link: null,
 				},
@@ -390,71 +121,174 @@ export const constantRoutes = [
 		],
 	},
 	{
-		name: "Tool",
-		path: "/tool",
+		name: 'Core',
+		path: '/core',
 		component: Layout,
 		hidden: false,
-		redirect: "noRedirect",
+		redirect: 'noRedirect',
 		alwaysShow: true,
 		meta: {
-			title: "系统工具",
-			icon: "tool",
+			title: '核心业务',
+			icon: 'monitor',
 			noCache: false,
 			link: null,
 		},
 		children: [
 			{
-				name: "Gen",
-				path: "gen",
-				component: () => import("@/views/tool/gen/index"),
+				name: 'Lost',
+				path: 'lost',
+				component: () => import('@/views/core/lost/index'),
 				hidden: false,
 				meta: {
-					title: "代码生成",
-					icon: "code",
+					title: '失物认领',
+					icon: 'online',
 					noCache: false,
 					link: null,
 				},
 			},
 			{
-				name: "Swagger",
-				path: "swagger",
-				component: () => import("@/views/tool/swagger/index"),
+				name: 'Old',
+				path: 'old',
+				component: () => import('@/views/core/old/index'),
 				hidden: false,
 				meta: {
-					title: "系统接口",
-					icon: "swagger",
+					title: '二手交易',
+					icon: 'job',
+					noCache: false,
+					link: null,
+				},
+			},
+			{
+				name: 'Activity',
+				path: 'activity',
+				component: () => import('@/views/core/activity/index'),
+				hidden: false,
+				meta: {
+					title: '校园活动',
+					icon: 'druid',
+					noCache: false,
+					link: null,
+				},
+			},
+			{
+				name: 'Announcement',
+				path: 'announcement',
+				component: () => import('@/views/core/announcement/index'),
+				hidden: false,
+				meta: {
+					title: '公告管理',
+					icon: 'server',
+					noCache: false,
+					link: null,
+				},
+			},
+			{
+				name: 'Recruit',
+				path: 'recruit',
+				component: () => import('@/views/core/recruit/index'),
+				hidden: false,
+				meta: {
+					title: '招聘管理',
+					icon: 'redis',
 					noCache: false,
 					link: null,
 				},
 			},
 		],
 	},
-	// {
-	//     "name": "Http://ruoyi.vip",
-	//     "path": "http://ruoyi.vip",
-	//     "hidden": false,
-	//     "meta": {
-	//         "title": "若依官网",
-	//         "icon": "guide",
-	//         "noCache": false,
-	//         "link": "http://ruoyi.vip"
-	//     }
-	// }
-]
+	{
+		name: 'Tool',
+		path: '/tool',
+		component: Layout,
+		hidden: false,
+		redirect: 'noRedirect',
+		alwaysShow: true,
+		meta: {
+			title: '系统工具',
+			icon: 'tool',
+			noCache: false,
+			link: null,
+		},
+		children: [
+			{
+				name: 'Gen',
+				path: 'gen',
+				component: () => import('@/views/tool/gen/index'),
+				hidden: false,
+				meta: {
+					title: '代码生成',
+					icon: 'code',
+					noCache: false,
+					link: null,
+				},
+			},
+			{
+				name: 'Swagger',
+				path: 'swagger',
+				component: () => import('@/views/tool/swagger/index'),
+				hidden: false,
+				meta: {
+					title: '系统接口',
+					icon: 'swagger',
+					noCache: false,
+					link: null,
+				},
+			},
+		],
+	},
+	{
+		name: 'Document',
+		path: '/document',
+		component: Layout,
+		hidden: false,
+		redirect: 'noRedirect',
+		alwaysShow: true,
+		meta: {
+			title: '文档中心',
+			icon: 'guide',
+			noCache: false,
+			link: 'null',
+		},
+		children: [
+			{
+				name: 'Knife4j',
+				path: 'knife4j',
+				component: () => import('@/views/document/knife4j/index'),
+				hidden: false,
+				meta: {
+					title: 'Knife4j',
+					icon: 'code',
+					noCache: false,
+					link: null,
+				},
+			},
+			{
+				name: 'Swagger',
+				path: 'swagger',
+				component: () => import('@/views/document/swagger/index'),
+				hidden: false,
+				meta: {
+					title: 'swagger',
+					icon: 'swagger',
+					noCache: false,
+					link: null,
+				},
+			},
+		],
+	},
+];
 
-// 动态路由，基于用户权限动态去加载
-export const dynamicRoutes = []
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: constantRoutes,
 	scrollBehavior(to, from, savedPosition) {
 		if (savedPosition) {
-			return savedPosition
+			return savedPosition;
 		} else {
-			return { top: 0 }
+			return { top: 0 };
 		}
 	},
-})
+});
 
-export default router
+export default router;

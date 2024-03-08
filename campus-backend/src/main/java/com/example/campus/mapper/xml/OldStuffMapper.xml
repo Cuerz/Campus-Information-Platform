@@ -6,7 +6,7 @@
         <result property="userId" column="user_id" jdbcType="INTEGER"/>
         <result property="oldStuffName" column="old_stuff_name" jdbcType="VARCHAR"/>
         <result property="oldStuffPic" column="old_stuff_pic" jdbcType="VARCHAR"/>
-        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="LONGVARCHAR"/>
         <result property="contactNumber" column="contact_number" jdbcType="VARCHAR"/>
         <result property="examine" column="examine" jdbcType="TINYINT"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>

@@ -120,6 +120,7 @@
             key="description"
             prop="description"
             v-if="columns[5].visible"
+            :show-overflow-tooltip="true"
           />
           <el-table-column
             label="审核状态"
@@ -427,7 +428,7 @@ function beforeImgUpload(file) {
   return isJPG && isLt4M;
 }
 
-/** 上传头像成功处理逻辑 */
+/** 上传成功处理逻辑 */
 function handleUploadSuccess(res) {
   form.value.itemPic = res.data;
   imgLoading.value = false;

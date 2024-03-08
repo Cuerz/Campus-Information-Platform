@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.campus.mapper.RecruitMapper">
+    <resultMap type="Recruit" id="RecruitMap">
+        <id property="recruitId" column="recruit_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="jobName" column="job_name" jdbcType="VARCHAR"/>
+        <result property="jobDescription" column="job_description" jdbcType="VARCHAR"/>
+        <result property="contactNumber" column="contact_number" jdbcType="VARCHAR"/>
+        <result property="examine" column="examine" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryAll" resultMap="RecruitMap">
+        select
+        r.* ,s.nick_name
+        FROM
+        recruit r
+        LEFT JOIN sys_user s
+        on
+        r.user_id = s.id
+        WHERE (IFNULL(r.job_name, '')) like
+        CONCAT('%', ifnull(#{jobName}, ''), '%')
+        <if test="examine != null">
+            and r.examine = #{examine}
+        </if>
+    </select>
+
+    <select id="queryById" resultMap="RecruitMap">
+        select r.*,
+               s.nick_name
+        FROM recruit r
+                 LEFT JOIN sys_user s
+                           on
+                               r.user_id = s.id
+        WHERE r.recruit_id = #{recruitId}
+    </select>
+
+    <insert id="insert" keyProperty="recruitId" useGeneratedKeys="true">
+        insert into recruit (user_id, job_name, job_description, contact_number)
+        values (#{userId}, #{jobName}, #{jobDescription}, #{contactNumber})
+    </insert>
+
+    <delete id="deleteById">
+        delete
+        from recruit
+        where recruit_id = #{recruitId}
+    </delete>
+
+    <update id="updateExamine">
+        update recruit
+        set examine = #{examine}
+        where recruit_id = #{recruitId}
+    </update>
+
+
+</mapper>

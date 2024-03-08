@@ -82,7 +82,6 @@ function handleLogin() {
   proxy.$refs.loginRef.validate(valid => {
     if (valid) {
       loading.value = true;
-
       // 调用action的登录方法
       userStore.login(loginForm.value).then(() => {
         const query = route.query;
