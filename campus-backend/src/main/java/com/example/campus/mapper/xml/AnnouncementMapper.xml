@@ -4,7 +4,7 @@
     <resultMap type="Announcement" id="AnnouncementMap">
         <id property="announcementId" column="announcement_id" jdbcType="INTEGER"/>
         <result property="announcementTitle" column="announcement_title" jdbcType="VARCHAR"/>
-        <result property="announcementContent" column="announcement_content" jdbcType="VARCHAR"/>
+        <result property="announcementContent" column="announcement_content" jdbcType="LONGVARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>

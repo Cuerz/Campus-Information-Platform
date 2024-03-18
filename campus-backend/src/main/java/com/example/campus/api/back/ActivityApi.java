@@ -1,6 +1,7 @@
 package com.example.campus.api.back;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.Activity;
 import com.example.campus.service.ActivityService;
@@ -23,6 +24,7 @@ public class ActivityApi {
 
     @SaCheckLogin
     @GetMapping("/list")
+    @SaCheckRole("Admin")
     @Operation(summary = "查看所有活动")
     public SaResult queryAll(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -34,6 +36,7 @@ public class ActivityApi {
 
     @SaCheckLogin
     @PostMapping("/add")
+    @SaCheckRole("Admin")
     @Operation(summary = "新增活动记录")
     public SaResult addUser(@RequestBody Activity activity) {
         return activityService.insert(activity);
@@ -41,6 +44,7 @@ public class ActivityApi {
 
     @SaCheckLogin
     @DeleteMapping("/delete/{activityId}")
+    @SaCheckRole("Admin")
     @Operation(summary = "删除活动")
     public SaResult delete(@PathVariable("activityId") Integer activityId) {
         return activityService.delete(activityId);
@@ -48,6 +52,7 @@ public class ActivityApi {
 
     @SaCheckLogin
     @PostMapping("/updateExamine")
+    @SaCheckRole("Admin")
     @Operation(summary = "修改活动审核状态")
     public SaResult updateExamine(@RequestBody Activity activity) {
         Integer activityId = activity.getActivityId();

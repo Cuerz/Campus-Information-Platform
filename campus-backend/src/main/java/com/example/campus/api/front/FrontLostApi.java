@@ -1,6 +1,8 @@
 package com.example.campus.api.front;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.LostItems;
 import com.example.campus.service.LostItemsService;
@@ -27,8 +29,9 @@ public class FrontLostApi {
         return lostItemsService.queryAll(null, null, null,true );
     }
 
-    @SaCheckLogin
+
     @PostMapping("/add")
+    @SaCheckRole(value = {"Teacher", "Student"}, mode = SaMode.OR)
     @Operation(summary = "新增失物认领记录")
     public SaResult addUser(@RequestBody LostItems lostItems) {
         return lostItemsService.insert(lostItems);

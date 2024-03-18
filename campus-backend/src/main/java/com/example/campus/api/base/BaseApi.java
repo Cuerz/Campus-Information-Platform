@@ -8,14 +8,13 @@ import com.example.campus.domain.SysUser;
 import com.example.campus.service.BaseService;
 import com.example.campus.service.SysUserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -33,13 +32,19 @@ public class BaseApi {
     @PostMapping("/login")
     @Operation(summary = "前台登录")
     public SaResult login(@RequestBody SysUser sysUser) {
-        return baseService.authCheck(sysUser.getUserName(), sysUser.getPassword());
+        if ("admin".equals(sysUser.getUserName()))
+            return SaResult.error("无权限");
+        else
+            return baseService.authCheck(sysUser.getUserName(), sysUser.getPassword());
     }
 
     @PostMapping("/admin/login")
     @Operation(summary = "后台登录")
     public SaResult adminLogin(@RequestBody SysUser sysUser) {
-        return baseService.authCheck(sysUser.getUserName(), sysUser.getPassword());
+        if (!"admin".equals(sysUser.getUserName()))
+            return SaResult.error("无权限");
+        else
+            return baseService.authCheck(sysUser.getUserName(), sysUser.getPassword());
     }
 
     @GetMapping("/logout")
@@ -68,6 +73,7 @@ public class BaseApi {
 
 
     @PostMapping("/upload")
+    @Operation(summary = "上传通用接口")
     public SaResult upload(@RequestParam("imgFile") MultipartFile file) throws Exception {
         if (file.isEmpty()) {
             return SaResult.error("上传文件不能为空");
@@ -88,7 +94,7 @@ public class BaseApi {
             dir.mkdirs();
         }
         file.transferTo(new File(dir.getAbsolutePath() + File.separator + targetFileName));
-        return SaResult.data("http://localhost:8080/images/"+targetFileName);
+        return SaResult.data("http://localhost:8080/images/" + targetFileName);
     }
 
 

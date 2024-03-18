@@ -23,13 +23,12 @@ public class GlobalException {
         e.printStackTrace();
 
         String message = "";
-        if(e instanceof NotLoginException) {
+        if (e instanceof NotLoginException) {
             message = "Token 无效";
-        }
-        else if(e instanceof NotPermissionException) {
+        } else if (e instanceof NotPermissionException || e instanceof NotRoleException) {
             message = "无此权限";
         } else {
-            message=e.getMessage();
+            message = e.getMessage();
         }
 
         // 返回给前端

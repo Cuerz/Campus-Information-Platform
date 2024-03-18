@@ -1,6 +1,8 @@
 package com.example.campus.api.front;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.OldStuff;
 import com.example.campus.service.OldStuffService;
@@ -27,8 +29,9 @@ public class FrontOldStuffApi {
         return oldStuffService.queryAll(null, null, null,true);
     }
 
-    @SaCheckLogin
+
     @PostMapping("/add")
+    @SaCheckRole(value = {"Teacher", "Student"}, mode = SaMode.OR)
     @Operation(summary = "新增二手物品记录")
     public SaResult addUser(@RequestBody OldStuff oldStuff) {
         return oldStuffService.insert(oldStuff);

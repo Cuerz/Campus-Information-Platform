@@ -1,7 +1,6 @@
 package com.example.campus.api.back;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.SysUser;
 import com.example.campus.service.SysUserService;
@@ -24,8 +23,8 @@ public class SysUserApi {
     @Resource
     private SysUserService sysUserService;
 
-    @SaCheckLogin
     @GetMapping("/list")
+    @SaCheckRole("Admin")
     @Operation(summary = "查看所有用户")
     public SaResult queryAll(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -35,32 +34,32 @@ public class SysUserApi {
         return sysUserService.queryAll(pageNum, pageSize, userName, phoneNumber, enable);
     }
 
-    @SaCheckLogin
     @GetMapping("/getUser")
+    @SaCheckRole("Admin")
     @Operation(summary = "查看用户信息")
     public SaResult queryById(
             @RequestParam(value = "id", required = true) Integer id) {
         return sysUserService.queryById(id);
     }
 
-    @SaCheckLogin
     @PostMapping("/add")
+    @SaCheckRole("Admin")
     @Operation(summary = "新增用戶")
     public SaResult addUser(@RequestBody SysUser sysUser) {
         return sysUserService.insert(sysUser);
     }
 
 
-    @SaCheckLogin
     @DeleteMapping("/delete/{id}")
+    @SaCheckRole("Admin")
     @Operation(summary = "删除用户")
     public SaResult deleteUSer(@PathVariable("id") Integer id) {
         return sysUserService.delete(id);
     }
 
 
-    @SaCheckLogin
     @PostMapping("/updateEnable")
+    @SaCheckRole("Admin")
     @Operation(summary = "修改用户启用")
     public SaResult updateEnable(@RequestBody SysUser sysUser) {
         Integer id = sysUser.getId();
@@ -69,7 +68,7 @@ public class SysUserApi {
     }
 
     @PostMapping("/resetPassword")
-    @SaCheckLogin
+    @SaCheckRole("Admin")
     @Operation(summary = "重置密码")
     public SaResult resetPassword(@RequestBody SysUser sysUser) {
         Integer id = sysUser.getId();
@@ -77,7 +76,7 @@ public class SysUserApi {
     }
 
     @PostMapping("/updatePassword")
-    @SaCheckLogin
+    @SaCheckRole("Admin")
     @Operation(summary = "修改密码")
     public SaResult updatePassword(@RequestBody Map<String, Object> map) {
         if (!map.containsKey("oldPassword") || !map.containsKey("newPassword") || !map.containsKey("confirmPassword")) {
@@ -93,7 +92,7 @@ public class SysUserApi {
     }
 
     @PostMapping("/update")
-    @SaCheckLogin
+    @SaCheckRole("Admin")
     @Operation(summary = "更新用户信息")
     public SaResult updateBasciInfo(@RequestBody SysUser sysUser) {
         return sysUserService.updateBasicInfo(sysUser);

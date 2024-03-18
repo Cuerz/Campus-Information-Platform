@@ -1,6 +1,6 @@
 package com.example.campus.api.back;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.OldStuff;
 import com.example.campus.service.OldStuffService;
@@ -20,8 +20,8 @@ public class OldStuffApi {
     @Resource
     private OldStuffService oldStuffService;
 
-    @SaCheckLogin
     @GetMapping("/list")
+    @SaCheckRole("Admin")
     @Operation(summary = "查看所有二手物品")
     public SaResult queryAll(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -30,23 +30,23 @@ public class OldStuffApi {
         return oldStuffService.queryAll(pageNum, pageSize, oldStuffName, examine);
     }
 
-    @SaCheckLogin
     @PostMapping("/add")
+    @SaCheckRole("Admin")
     @Operation(summary = "新增二手物品记录")
     public SaResult addUser(@RequestBody OldStuff oldStuff) {
         return oldStuffService.insert(oldStuff);
     }
 
 
-    @SaCheckLogin
     @DeleteMapping("/delete/{oldStuffId}")
+    @SaCheckRole("Admin")
     @Operation(summary = "删除二手物品记录")
     public SaResult delete(@PathVariable("oldStuffId") Integer oldStuffId) {
         return oldStuffService.delete(oldStuffId);
     }
 
-    @SaCheckLogin
     @PostMapping("/updateExamine")
+    @SaCheckRole("Admin")
     @Operation(summary = "修改二手物品审核状态")
     public SaResult updateExamine(@RequestBody OldStuff oldStuff) {
         Integer oldStuffId = oldStuff.getOldStuffId();

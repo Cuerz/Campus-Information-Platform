@@ -1,6 +1,6 @@
 package com.example.campus.api.back;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.service.SysRoleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,8 +19,8 @@ public class SysRoleApi {
     @Resource
     private SysRoleService sysRoleService;
 
-    @SaCheckLogin
     @GetMapping("/list")
+    @SaCheckRole("Admin")
     @Operation(summary = "查看所有角色")
     public SaResult queryAll(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                              @RequestParam(value = "pageSize", required = false) Integer pageSize,

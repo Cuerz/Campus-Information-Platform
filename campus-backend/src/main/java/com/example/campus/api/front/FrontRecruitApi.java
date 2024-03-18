@@ -1,6 +1,8 @@
 package com.example.campus.api.front;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.Recruit;
 import com.example.campus.service.RecruitService;
@@ -27,8 +29,9 @@ public class FrontRecruitApi {
         return recruitService.queryAll(null, null, null, true);
     }
 
-    @SaCheckLogin
+
     @PostMapping("/add")
+    @SaCheckRole("Teacher")
     @Operation(summary = "新增招聘需求")
     public SaResult addUser(@RequestBody Recruit recruit) {
         return recruitService.insert(recruit);

@@ -1,8 +1,8 @@
 {
-  "name": "ruoyi",
-  "version": "3.8.7",
-  "description": "若依管理系统",
-  "author": "若依",
+  "name": "campus",
+  "version": "1.0.0",
+  "description": "校园信息公开平台后台系统",
+  "author": "Cuerz",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -12,8 +12,8 @@
     "preview": "vite preview"
   },
   "repository": {
-    "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
+    "type": "github",
+    "url": "https://github.com/Cuerz/Campus-Information-Platform"
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.3.1",

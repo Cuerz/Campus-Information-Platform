@@ -1,6 +1,8 @@
 package com.example.campus.api.front;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.Activity;
 import com.example.campus.service.ActivityService;
@@ -29,8 +31,9 @@ public class FrontActivityApi {
         return activityService.queryAll(null, null, null,null, true);
     }
 
-    @SaCheckLogin
+
     @PostMapping("/add")
+    @SaCheckRole("Teacher")
     @Operation(summary = "新增活动记录")
     public SaResult addUser(@RequestBody Activity activity) {
         return activityService.insert(activity);

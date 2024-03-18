@@ -1,6 +1,6 @@
 package com.example.campus.api.back;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckRole;
 import cn.dev33.satoken.util.SaResult;
 import com.example.campus.domain.Announcement;
 import com.example.campus.service.AnnouncementService;
@@ -21,8 +21,8 @@ public class AnnouncementApi {
     private AnnouncementService announcementService;
 
 
-    @SaCheckLogin
     @GetMapping("/list")
+    @SaCheckRole("Admin")
     @Operation(summary = "查看所有公告")
     public SaResult queryAll(@RequestParam(value = "pageNum", required = false) Integer pageNum,
                              @RequestParam(value = "pageSize", required = false) Integer pageSize,
@@ -31,16 +31,16 @@ public class AnnouncementApi {
         return announcementService.queryAll(pageNum, pageSize, announcementTitle, announcementContent);
     }
 
-    @SaCheckLogin
     @PostMapping("/add")
+    @SaCheckRole("Admin")
     @Operation(summary = "新增公告")
     public SaResult addUser(@RequestBody Announcement announcement) {
         return announcementService.insert(announcement);
     }
 
 
-    @SaCheckLogin
     @DeleteMapping("/delete/{announcementId}")
+    @SaCheckRole("Admin")
     @Operation(summary = "删除公告")
     public SaResult delete(@PathVariable("announcementId") Integer announcementId) {
         return announcementService.delete(announcementId);
