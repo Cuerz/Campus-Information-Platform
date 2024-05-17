@@ -15,7 +15,7 @@
           >
         </el-col>
       </el-row>
-      <ul class="w-[50%] mx-auto mt-4">
+      <ul class="w-[70%] mx-auto mt-4">
         <li
           class="border-gray-200 border-b-[1px] py-2"
           v-for="(item, id) in activitiesList"
@@ -191,3 +191,4 @@ function reset() {
 
 getList();
 </script>
+

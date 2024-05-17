@@ -56,7 +56,7 @@
               <span>用户增长趋势</span>
             </div>
           </template>
-          <div ref="userChartDom" style="width: 800px; height: 400px" />
+          <div ref="userChartDom" style="width: 550px; height: 400px" />
         </el-card>
       </el-col>
       <el-col :span="12">
@@ -66,7 +66,7 @@
               <span>角色分布</span>
             </div>
           </template>
-          <div ref="roleChartDom" style="width: 800px; height: 400px" />
+          <div ref="roleChartDom" style="width: 550px; height: 400px" />
         </el-card>
       </el-col>
     </el-row>
@@ -74,54 +74,54 @@
 </template>
 
 <script setup name="Index">
-import * as echarts from 'echarts';
-import { listUser } from '@/api/system/user';
+import * as echarts from "echarts";
+import { listUser } from "@/api/system/user";
 
 const { proxy } = getCurrentInstance();
 
-const version = ref('1.0.0');
+const version = ref("1.0.0");
 
 const userChart = shallowRef(null);
 const roleChart = shallowRef(null);
 const data = reactive({
   userOption: {
     title: {
-      text: '用户增长趋势',
-      left: 'center',
+      text: "用户增长趋势",
+      left: "center",
     },
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       axisPointer: {
-        type: 'shadow',
+        type: "shadow",
       },
     },
     xAxis: {
-      type: 'category',
+      type: "category",
       data: [],
     },
     yAxis: {
-      type: 'value',
+      type: "value",
     },
     series: [
       {
         data: [],
-        type: 'line',
+        type: "line",
         smooth: true,
       },
     ],
   },
   roleOption: {
     title: {
-      text: '角色分布',
-      left: 'center',
+      text: "角色分布",
+      left: "center",
     },
     tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)',
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c} ({d}%)",
     },
     legend: {
-      left: 'center',
-      top: 'bottom',
+      left: "center",
+      top: "bottom",
     },
     toolbox: {
       show: true,
@@ -134,10 +134,10 @@ const data = reactive({
     },
     series: [
       {
-        name: '角色：',
-        type: 'pie',
+        name: "角色：",
+        type: "pie",
         radius: [20, 140],
-        roseType: 'area',
+        roseType: "area",
         itemStyle: {
           borderRadius: 5,
         },
@@ -161,16 +161,16 @@ function setRoleOption(series) {
 }
 
 async function initchart() {
-  userChart.value = echarts.init(proxy.$refs.userChartDom, 'customed', {
-    renderer: 'svg',
+  userChart.value = echarts.init(proxy.$refs.userChartDom, "customed", {
+    renderer: "svg",
   });
-  roleChart.value = echarts.init(proxy.$refs.roleChartDom, 'customed', {
-    renderer: 'svg',
+  roleChart.value = echarts.init(proxy.$refs.roleChartDom, "customed", {
+    renderer: "svg",
   });
   const res = await listUser();
 
   const createTime = res.data.map((item) => {
-    return proxy.parseTime(item.createTime, '{y}-{m}-{d}');
+    return proxy.parseTime(item.createTime, "{y}-{m}-{d}");
   });
   createTime.sort();
   const roleDescription = res.data.map((item) => {
@@ -199,7 +199,7 @@ async function initchart() {
 }
 
 function goTarget(url) {
-  window.open(url, '__blank');
+  window.open(url, "__blank");
 }
 
 onMounted(() => {
@@ -213,7 +213,7 @@ onMounted(() => {
     margin-bottom: 20px;
   }
 
-  font-family: 'open sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   // font-size: 13px;
   color: #676a6c;
   overflow-x: hidden;

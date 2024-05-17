@@ -6,7 +6,7 @@
           <h3 class="font-sans font-bold text-[36px]">公告区</h3>
         </el-col>
       </el-row>
-      <ul class="w-[50%] mx-auto mt-4">
+      <ul class="w-[70%] mx-auto mt-4">
         <li
           class="border-gray-200 border-b-[1px] py-2"
           v-for="(item, id) in announcementList"
@@ -46,3 +46,4 @@ function getList() {
 
 getList();
 </script>
+

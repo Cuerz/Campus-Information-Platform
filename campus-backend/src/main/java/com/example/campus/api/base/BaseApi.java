@@ -83,7 +83,7 @@ public class BaseApi {
         String filetype = originalFilename.split("\\.")[1];
 
 
-        if (filetype.indexOf("jpg") < 0 && filetype.indexOf("png") < 0) {
+        if (filetype.indexOf("jpg") < 0 && filetype.indexOf("jpeg") < 0 && filetype.indexOf("png") < 0) {
             return SaResult.error("仅支持图片格式");
         }
 

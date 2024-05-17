@@ -1,13 +1,11 @@
 <template>
   <div>
-    <div class="bg-gray-800 w-full h-[7vh]">
+    <div class="bg-gray-800 w-full">
       <div class="relative">
         <div class="py-[5px] px-0 flex mx-auto w-[80%] justify-between">
           <div>
             <span class="text-white text-[35px]">NUIST</span>
-            <span class="text-gray-400 text-[12px] relative top-2"
-              >信息公开平台</span
-            >
+            <span class="text-gray-400 text-[12px]">信息公开平台</span>
           </div>
           <div>
             <ul class="w-auto m-0 flex h-[100%]">
@@ -161,3 +159,4 @@ function logout() {
     .catch(() => {});
 }
 </script>
+

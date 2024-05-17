@@ -17,14 +17,14 @@
       </el-col>
     </el-row>
 
-    <div class="mt-14 mx-14 flex justify-between flex-wrap">
+    <div class="mt-14 mx-14 grid grid-cols-4 gap-[20px]">
       <div
-        class="w-[13vw] h-[37vh] bg-white mx-9 my-8"
+        class="w-[15vw] bg-white"
         :key="id"
         v-for="(item, id) in lostItemsList"
       >
         <el-image
-          class="w-[13vw] h-[25vh] object-cover block"
+          class="w-[15vw] h-[25vh] object-cover block"
           :src="item.itemPic"
           :preview-src-list="[item.itemPic]"
           preview-teleported
@@ -260,3 +260,4 @@ getList();
   display: block;
 }
 </style>
+
